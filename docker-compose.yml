@@ -1,14 +1,23 @@
 version: '3'
 services:
-  dnsmasq:
-    restart: always
-    image: andyshinn/dnsmasq
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-    extra_hosts:
-      - "local.example.com:127.0.0.1"
-    cap_add:
-      - NET_ADMIN
+  # dnsmasq:
+  #   restart: always
+  #   image: andyshinn/dnsmasq
+  #   ports:
+  #     - "53:53/udp"
+  #     - "53:53/tcp"
+  #   extra_hosts:
+  #     - "local.example.com:127.0.0.1"
+  #   cap_add:
+  #     - NET_ADMIN
+  #   volumes:
+  #     - ./dnsmasq.conf:/etc/dnsmasq.conf
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
     volumes:
-      - ./dnsmasq.conf:/etc/dnsmasq.conf
+    - ./mysql/data:/var/lib/mysql
+    - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+    ports:
+    - 3306:3306
