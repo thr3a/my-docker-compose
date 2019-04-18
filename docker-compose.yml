@@ -21,3 +21,9 @@ services:
     - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
     ports:
     - 3306:3306
+  ab:
+    build: ./docker/ab
+    image: my/ab
+    tty: true
+    stdin_open: true
+    entrypoint: /bin/sh
