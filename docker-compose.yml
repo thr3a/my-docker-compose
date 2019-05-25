@@ -27,21 +27,21 @@ services:
     image: redis:3
     ports:
       - "6379:6379"
-  ab:
-    build: ./docker/ab
-    image: my/ab
-    tty: true
-    stdin_open: true
-    entrypoint: /bin/sh
-  postgresql:
-    image: postgres:10.5
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    user: root
+  # ab:
+  #   build: ./docker/ab
+  #   image: my/ab
+  #   tty: true
+  #   stdin_open: true
+  #   entrypoint: /bin/sh
+  # postgresql:
+  #   image: postgres:10.5
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: root
+  #     POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+  #   user: root
   nginx:
     image: 'nginx:1-alpine'
     ports:
@@ -57,3 +57,9 @@ services:
   python:
     build: ./docker/python
     image: my/python
+    ports:
+      - "30000:8888"
+    environment:
+      JUPYTER_ENABLE_LAB: 1
+    volumes:
+      - ./workspace:/home/jovyan
